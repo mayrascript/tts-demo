@@ -38,7 +38,7 @@ export default function Home() {
             return synth.getVoices();
         }
         return [];
-    }, [])
+    }, [synth])
 
     const onSubmit: SubmitHandler<IFormInput> = ({textToSpeech, rate, pitch, voice}) => {
         const utterance = new SpeechSynthesisUtterance();
@@ -58,10 +58,10 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1>Speech synthesizer</h1>
 
-      <p>
-        Enter some text in the input below and press return to hear it. change voices
-        using the dropdown menu.
-      </p>
+          <p>
+            Enter some text in the input below and press Play to hear it. change voices
+            using the dropdown menu.
+          </p>
 
 
         <Form {...form}>
@@ -91,7 +91,6 @@ export default function Home() {
                             <FormControl>
                                 <Input type="range" placeholder="Rate" {...form.register("rate")} />
                             </FormControl>
-                            {/*<FormDescription>This is your public display name.</FormDescription>*/}
                             <FormMessage/>
                         </FormItem>
                     )}
@@ -107,7 +106,6 @@ export default function Home() {
                                 <Input type="range" placeholder="Pitch" min="0" max="2" step="0.1"
                                        id="pitch" {...form.register("pitch")} />
                             </FormControl>
-                            {/*<FormDescription>This is your public display name.</FormDescription>*/}
                             <FormMessage/>
                         </FormItem>
                     )}
@@ -138,7 +136,7 @@ export default function Home() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Play</Button>
             </form>
         </Form>
     </main>
