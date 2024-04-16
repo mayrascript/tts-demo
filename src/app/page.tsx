@@ -24,21 +24,22 @@ export default function Home() {
     )
 
     const [synth, setSynth] = useState<SpeechSynthesis>();
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+
 
     useEffect(() => {
         const synth = window.speechSynthesis;
         if(synth) {
             setSynth(synth)
         }
-    }, [])
 
-
-    const voices = useMemo(() => {
-        if(synth) {
-            return synth.getVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                const voices = speechSynthesis.getVoices();
+                setVoices(voices)
+            }
         }
-        return [];
-    }, [synth])
+    }, [])
 
     const onSubmit: SubmitHandler<IFormInput> = ({textToSpeech, rate, pitch, voice}) => {
         const utterance = new SpeechSynthesisUtterance();
