@@ -43,7 +43,7 @@ export default function Home() {
 
     const onSubmit: SubmitHandler<IFormInput> = ({textToSpeech, rate, pitch, voice}) => {
         const utterance = new SpeechSynthesisUtterance();
-        const selectedVoice = voices.find(voice => voice)
+        const selectedVoice = voices.find(v => v.name === voice)
         utterance.voice = selectedVoice || null;
         utterance.volume = 1;
         utterance.pitch = pitch;
